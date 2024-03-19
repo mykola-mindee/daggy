@@ -1,0 +1,28 @@
+[tool.ruff]
+# Use of assert detected
+ignore = ["E501", "S101"]
+line-length = 100
+target-version = "py38"
+select = [
+    "B",
+    "E",
+    "F",
+    "I",
+    "N",
+    "PGH",
+    "UP",
+    "S",
+    "T20",
+    "TID",
+    "W",
+]
+
+[tool.ruff.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[tool.black]
+line-length = 100
+skip-magic-trailing-comma = true
+
+[tool.pytest.ini_options]
+addopts = "--cov-report=term-missing:skip-covered --junit-xml=pytest-junit.xml tests"

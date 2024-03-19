@@ -1,0 +1,17 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+{% raw %}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+{% endraw %}
+
+jobs:
+  build-docker-image:
+    uses: teamMindee/actions/.github/workflows/build-docker.yml@main
+    secrets: inherit # pass all secrets

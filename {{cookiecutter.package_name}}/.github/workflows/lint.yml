@@ -1,0 +1,17 @@
+name: Lint via pre-commit
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+{% raw %}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+{% endraw %}
+
+jobs:
+  lint:
+    uses: teamMindee/actions/.github/workflows/lint-by-pre-commit.yml@main
+    secrets: inherit # pass all secrets

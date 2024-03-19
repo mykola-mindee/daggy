@@ -1,0 +1,26 @@
+version: 2
+{% raw %}
+registries:
+  pypi-codeartifact:
+    type: python-index
+    url: https://mindee-095352705314.d.codeartifact.eu-west-1.amazonaws.com/pypi/python/simple/
+    username: aws
+    password: ${{secrets.AWS_CA_TOKEN}}
+    replaces-base: true
+{% endraw %}
+updates:
+  - package-ecosystem: "pip"
+    insecure-external-code-execution: allow
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "teamMindee/r-d"
+    registries:
+      - pypi-codeartifact
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "teamMindee/rd-ml-eng"

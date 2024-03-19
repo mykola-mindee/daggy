@@ -1,0 +1,31 @@
+name: Tag and release
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      trigger_github_release:
+        description: 'Trigger a github release'
+        type: boolean
+        default: false
+
+jobs:
+  tag:
+    uses: teamMindee/actions/.github/workflows/tag-on-version-change.yml@main
+    with:
+      module-name: {{cookiecutter.module_name}}
+{% raw %}
+  codeartifact-release:
+    needs: tag
+    uses: teamMindee/actions/.github/workflows/flit-release-codeartifact.yml@main
+    secrets: inherit # pass all secrets
+    with:
+      ref: ${{needs.tag.outputs.version}}
+  github-release:
+    needs: tag
+    if: inputs.trigger_github_release || github.ref_name == 'main'
+    uses: teamMindee/actions/.github/workflows/github-release.yml@main
+    with:
+      ref: ${{needs.tag.outputs.version}}
+{% endraw %}

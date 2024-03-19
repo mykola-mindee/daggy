@@ -1,0 +1,10 @@
+{
+  "project_name": "GitHub Project Name",
+  "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+  "module_name": "{{ cookiecutter.package_name.replace('-', '_') }}",
+  "short_description": "Project's short description.",
+  "long_description": "This is a long description for my project.",
+  "is_opensource": ["no", "yes"],
+  "use_docker": ["yes", "no"],
+  "_jinja2_env_vars": {"lstrip_blocks": "yes", "trim_blocks": "yes"}
+}

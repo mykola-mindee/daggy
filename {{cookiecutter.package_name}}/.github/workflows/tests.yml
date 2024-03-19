@@ -1,0 +1,17 @@
+name: Tests
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+{% raw %}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+{% endraw %}
+
+jobs:
+  tests:
+    uses: teamMindee/actions/.github/workflows/flit-tests.yml@main
+    secrets: inherit # pass all secrets

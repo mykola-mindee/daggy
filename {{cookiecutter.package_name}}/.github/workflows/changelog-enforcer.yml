@@ -1,0 +1,8 @@
+name: Changelog enforcer
+
+on:
+  pull_request:
+
+jobs:
+  changelog:
+    uses: teamMindee/actions/.github/workflows/changelog-enforcer.yml@main
